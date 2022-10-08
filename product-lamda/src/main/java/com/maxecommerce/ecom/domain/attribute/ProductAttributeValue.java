@@ -24,17 +24,24 @@ import java.time.LocalDateTime;
 @Table(name = "product_attribute_value")
 public class ProductAttributeValue {
   @Id Long id;
-  @ManyToOne @JoinColumn(name = "product_id")
+
+  @ManyToOne
+  @JoinColumn(name = "product_id")
   private Product product;
-  @ManyToOne @JoinColumn(name = "attribute_id")
+
+  @ManyToOne
+  @JoinColumn(name = "attribute_id")
   private Attribute attribute;
+
   @Column(name = "string_val", length = 2048)
   private String stringVal;
+
   @Column(name = "date_val")
   private LocalDateTime dateVal;
+
   @Column(name = "long_val")
   private Long longVal;
+
   @Column(name = "double_val")
   private Double doubleVal;
-
 }

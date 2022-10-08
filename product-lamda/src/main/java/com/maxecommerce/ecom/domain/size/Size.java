@@ -14,7 +14,6 @@ import javax.persistence.Id;
 @Accessors(chain = true)
 @Embeddable
 public class Size {
-  @Id
-  private Integer id;
+  @Id private Integer id;
   private String label;
 }

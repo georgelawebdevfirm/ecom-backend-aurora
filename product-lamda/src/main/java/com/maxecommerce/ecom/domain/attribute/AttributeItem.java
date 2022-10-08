@@ -13,8 +13,7 @@ import javax.persistence.Id;
 @Embeddable
 public class AttributeItem {
 
-  @Id
-  private Integer id;
+  @Id private Integer id;
 
   @Column(name = "attribute_label")
   private String label;

@@ -8,8 +8,8 @@ import javax.inject.Named;
 @Named("product")
 public class GreetingLambda implements RequestHandler<Person, String> {
 
-    @Override
-    public String handleRequest(Person input, Context context) {
-        return "Hello " + input.getName();
-    }
+  @Override
+  public String handleRequest(Person input, Context context) {
+    return "Hello " + input.getName();
+  }
 }

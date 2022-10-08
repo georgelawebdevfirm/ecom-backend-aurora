@@ -10,11 +10,10 @@ import javax.transaction.Transactional;
 @ApplicationScoped
 public class ProductService {
 
-    final ProductRepository productRepository;
+  final ProductRepository productRepository;
 
-    @Transactional
-    public long count() {
-        return productRepository.count();
-    }
-
+  @Transactional
+  public long count() {
+    return productRepository.count();
+  }
 }

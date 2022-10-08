@@ -1,13 +1,13 @@
 package com.maxecommerce.ecom.domain.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.maxecommerce.ecom.domain.attribute.ProductAttributeValue;
+import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.maxecommerce.ecom.domain.BaseEntity;
+import com.maxecommerce.ecom.domain.attribute.ProductAttributeValue;
 import com.maxecommerce.ecom.domain.category.Category;
 import com.maxecommerce.ecom.domain.dimension.Dimension;
 import com.maxecommerce.ecom.domain.option.OptionGroup;
 import com.maxecommerce.ecom.domain.seo.SeoAttributes;
-import com.maxecommerce.ecom.domain.size.Size;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -19,15 +19,12 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -40,7 +37,13 @@ import static com.maxecommerce.ecom.domain.JpaTypeConstants.MAX_URL_LENGTH;
 @Getter
 @Accessors(chain = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Entity @Table(name = "product", indexes = @Index(columnList = "storeId"))
+@Entity
+@Table(
+    name = "product",
+    indexes = {
+      @Index(name = "idx_product_store_id", columnList = "storeId"),
+      @Index(name = "idx_product_store_id", columnList = "storeId")
+    })
 public class Product extends BaseEntity<Long> {
 
   private String name;
@@ -60,19 +63,15 @@ public class Product extends BaseEntity<Long> {
 
   private Integer sortIndex;
 
-  @Embedded
-  private Dimension dimension;
+  @Embedded private Dimension dimension;
 
-  @Transient
-  private Size size;
-
-  @Column(precision=12, scale=2)
+  @Column(precision = 12, scale = 2)
   private BigDecimal cost;
 
-  @Column(precision=12, scale=2)
+  @Column(precision = 12, scale = 2)
   private BigDecimal retailPrice;
 
-  @Column(precision=12, scale=2)
+  @Column(precision = 12, scale = 2)
   private BigDecimal salePrice;
 
   private Boolean showRetailPrice;
@@ -135,13 +134,9 @@ public class Product extends BaseEntity<Long> {
 
   private Boolean taxClass;
 
-  // SEO
-  @Embedded
-  private SeoAttributes seoAttributes;
+  @Embedded private SeoAttributes seoAttributes;
 
   private Boolean status;
-
-  private String storeId;
 
   private Boolean isComplexVariant;
 
@@ -150,31 +145,16 @@ public class Product extends BaseEntity<Long> {
   @OneToMany(mappedBy = "product")
   private List<ProductAttributeValue> attributes;
 
+  @Column(name = "additionalAttributes", columnDefinition = "json")
+  @JsonRawValue
+  private String additionalAttributes;
+
   @ManyToMany
-  @JoinTable(name="product_option_group",
-          joinColumns=
-          @JoinColumn(name="product_id", referencedColumnName="id"),
-          inverseJoinColumns=
-          @JoinColumn(name="option_group_id", referencedColumnName="id")
-  )
+  @JoinTable(
+      name = "product_option_group",
+      joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
+      inverseJoinColumns = @JoinColumn(name = "option_group_id", referencedColumnName = "id"))
   private Set<OptionGroup> optionGroups = new HashSet<>();
 
-  private Integer qty;
-
   private Boolean isImported;
-
-  @Override
-  public boolean equals(Object obj) {
-    if (obj == null || (obj.getClass() != this.getClass())) {
-      return false;
-    }
-
-    Product ad = (Product) obj;
-    return ad.getId().equals(this.getId());
-  }
-
-  @Override
-  public int hashCode() {
-    return getId().hashCode();
-  }
 }

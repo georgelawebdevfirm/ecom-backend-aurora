@@ -15,9 +15,8 @@ import java.time.LocalDateTime;
 @Embeddable
 public class AuditAttributes {
 
-    private LocalDateTime createdAt;
-    private String createdBy;
-    private LocalDateTime updatedAt;
-    private String updatedBy;
-
+  private LocalDateTime createdAt;
+  private String createdBy;
+  private LocalDateTime updatedAt;
+  private String updatedBy;
 }
