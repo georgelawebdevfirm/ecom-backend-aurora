@@ -13,11 +13,12 @@ import javax.persistence.Table;
 @Setter
 @Getter
 @Entity
-@Table(name = "option_group",
-        indexes = {
-                @Index(name = "idx_option_group_uuid", columnList = "uuid"),
-                @Index(name = "idx_option_group_store_id", columnList = "storeId")
-        })
+@Table(
+    name = "option_group",
+    indexes = {
+      @Index(name = "idx_option_group_uuid", columnList = "uuid"),
+      @Index(name = "idx_option_group_store_id", columnList = "storeId")
+    })
 public class OptionGroup extends BaseEntity<Long> {
   private String name;
   private String label;

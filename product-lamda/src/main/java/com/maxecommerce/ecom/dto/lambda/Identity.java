@@ -18,5 +18,4 @@ public class Identity {
   String userArn;
   String userAgent;
   String user;
-
 }

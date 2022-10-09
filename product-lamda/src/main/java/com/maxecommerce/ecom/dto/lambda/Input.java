@@ -1,6 +1,5 @@
 package com.maxecommerce.ecom.dto.lambda;
 
-
 import com.amazonaws.services.lambda.runtime.Context;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
@@ -17,8 +16,7 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Input implements Serializable {
 
-  @Serial
-  private static final long serialVersionUID = 8563428125726641250L;
+  @Serial private static final long serialVersionUID = 8563428125726641250L;
 
   private String resource;
   private String path;

@@ -1,8 +1,6 @@
 package com.maxecommerce.ecom.dto.lambda;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -26,10 +24,7 @@ public class Output {
     final Map<String, String> headers = new HashMap<>();
     headers.put("Access-Control-Allow-Origin", "*");
     headers.put("Content-Type", "application/json");
-    output.setIsBase64Encoded(false)
-            .setStatusCode(200)
-            .setHeaders(headers)
-            .setBody(body);
+    output.setIsBase64Encoded(false).setStatusCode(200).setHeaders(headers).setBody(body);
     return output;
   }
 }

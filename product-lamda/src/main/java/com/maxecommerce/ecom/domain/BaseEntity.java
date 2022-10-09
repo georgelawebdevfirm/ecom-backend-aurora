@@ -23,8 +23,7 @@ public abstract class BaseEntity<I extends Serializable> {
   protected Boolean active = true;
   @Embedded protected AuditAttributes auditAttributes;
 
-  public boolean hasId(){
+  public boolean hasId() {
     return id != null;
   }
-
 }

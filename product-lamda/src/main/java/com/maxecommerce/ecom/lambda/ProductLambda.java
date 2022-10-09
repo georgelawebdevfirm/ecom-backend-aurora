@@ -24,18 +24,18 @@ public class ProductLambda implements RequestStreamHandler {
 
   @Override
   public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) {
-    try{
+    try {
       final Input input = mapper.readValue(inputStream, Input.class);
       final ActionEventConfig actionEventConfig =
-              ActionEventConfig.getActionEventConfig(input.getActionEvent()).orElseThrow();
+          ActionEventConfig.getActionEventConfig(input.getActionEvent()).orElseThrow();
       if (actionEventConfig == ActionEventConfig.PRODUCT_CREATE) {
-        final Product result = productService.create(mapper.readValue(input.getBody(), Product.class));
+        final Product result =
+            productService.create(mapper.readValue(input.getBody(), Product.class));
         final Output output = Output.getInstance(mapper.writeValueAsString(result));
         mapper.writeValue(outputStream, output);
       }
     } catch (Exception e) {
       log.error("Cannot perform action", e);
     }
-
   }
 }

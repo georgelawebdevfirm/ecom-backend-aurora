@@ -46,5 +46,4 @@ public class ProductServiceImpl implements ProductService {
   public List<Product> page() {
     return null;
   }
-
 }

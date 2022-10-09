@@ -21,12 +21,11 @@
     datasource:
       db-kind: mysql
       jdbc:
-        driver: org.testcontainers.jdbc.ContainerDatabaseDriver
-        url: jdbc:tc:mysql:latest:///test_product_database
-      password: admin
-      username: admin
+        url: jdbc:tc:mysql:latest:///database
     hibernate-orm:
       database:
-        generation: none
-      sql-load-script: db/test/init-schema.sql
+        generation: create-drop
+        # quarkus.datasource.jdbc.max-size=8
+        #quarkus.datasource.jdbc.min-size=2
+      #sql-load-script: db/test/init-schema.sql
 

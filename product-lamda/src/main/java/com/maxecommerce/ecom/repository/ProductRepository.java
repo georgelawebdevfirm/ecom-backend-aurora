@@ -8,6 +8,5 @@ import java.util.UUID;
 
 public interface ProductRepository extends CrudRepository<Product, Long> {
 
-    List<Product> findProductsByUuid(UUID uuid);
-
+  List<Product> findProductsByUuid(UUID uuid);
 }
