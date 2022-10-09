@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.math.BigDecimal;
 
 @Setter
 @Getter
@@ -14,17 +15,19 @@ import javax.persistence.Enumerated;
 @Embeddable
 public class Dimension {
 
-  @Column(name = "dimension_length")
-  private Float length;
+  public static final BigDecimal DEFAULT_WEIGHT_VALUE = BigDecimal.valueOf(100);
 
-  @Column(name = "dimension_width")
-  private Float width;
+  @Column(name = "dimension_length", precision = 15, scale = 6)
+  private BigDecimal length;
 
-  @Column(name = "dimension_height")
-  private Float height;
+  @Column(name = "dimension_width", precision = 15, scale = 6)
+  private BigDecimal width;
 
-  @Column(name = "dimension_weight")
-  private Float weight = 100F; // Default value
+  @Column(name = "dimension_height", precision = 15, scale = 6)
+  private BigDecimal height;
+
+  @Column(name = "dimension_weight", precision = 15, scale = 6)
+  private BigDecimal weight = DEFAULT_WEIGHT_VALUE;
 
   // Unit
   @Enumerated(EnumType.STRING)

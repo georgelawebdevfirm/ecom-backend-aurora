@@ -5,18 +5,26 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.util.UUID;
 
 @Setter
 @Getter
 @Entity
-@Table(name = "option_group")
-public class OptionGroup extends BaseEntity<UUID> {
+@Table(name = "option_group",
+        indexes = {
+                @Index(name = "idx_option_group_uuid", columnList = "uuid"),
+                @Index(name = "idx_option_group_store_id", columnList = "storeId")
+        })
+public class OptionGroup extends BaseEntity<Long> {
   private String name;
   private String label;
   private Boolean required;
   private Integer sort;
-  private String defaultOption;
-  private String storeId;
+
+  @ManyToOne
+  @JoinColumn(name = "default_option_id")
+  private Option defaultOption;
 }

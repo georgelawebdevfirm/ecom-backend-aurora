@@ -11,6 +11,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -24,7 +25,12 @@ import static com.maxecommerce.ecom.domain.JpaTypeConstants.MAX_URL_LENGTH;
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
-@Table(name = "category")
+@Table(
+    name = "category",
+    indexes = {
+      @Index(name = "idx_category_uuid", columnList = "uuid"),
+      @Index(name = "idx_category_store_id", columnList = "storeId")
+    })
 public class Category extends BaseEntity<Long> {
 
   private String label;
@@ -33,9 +39,6 @@ public class Category extends BaseEntity<Long> {
   @ManyToOne
   @JoinColumn(name = "parent_id")
   private Category parent;
-
-  @Column(length = MAX_URL_LENGTH)
-  private String url;
 
   @Embedded private SeoAttributes seo;
 

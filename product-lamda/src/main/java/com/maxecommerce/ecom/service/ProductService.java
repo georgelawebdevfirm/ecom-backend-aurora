@@ -1,19 +1,17 @@
 package com.maxecommerce.ecom.service;
 
-import com.maxecommerce.ecom.repository.ProductRepository;
-import lombok.RequiredArgsConstructor;
+import com.maxecommerce.ecom.domain.product.Product;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
-@RequiredArgsConstructor
-@ApplicationScoped
-public class ProductService {
+public interface ProductService {
+    Product create(Product entity);
+    Product update(Product entity);
+    void delete(Long id);
+    Optional<Product> findById(Long id);
+    Optional<Product> findByUuid(UUID uuid);
+    List<Product> page();
 
-  final ProductRepository productRepository;
-
-  @Transactional
-  public long count() {
-    return productRepository.count();
-  }
 }

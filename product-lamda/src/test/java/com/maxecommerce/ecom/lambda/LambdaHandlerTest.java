@@ -1,21 +1,21 @@
 package com.maxecommerce.ecom.lambda;
 
+import com.maxecommerce.ecom.dto.lambda.Input;
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.TestProfile;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.containsString;
 
 @QuarkusTest
-public class LambdaHandlerTest {
+class LambdaHandlerTest {
 
   @Test
-  public void testSimpleLambdaSuccess() throws Exception {
-    // you test your lambdas by invoking on http://localhost:8081
-    // this works in dev mode too
-
-    Person in = new Person();
-    in.setName("Stu");
+  void testSimpleLambdaSuccess() throws Exception {
+    Input in = new Input();
+    in.setBody("{}");
+    in.setActionEvent("create-product");
     given()
         .contentType("application/json")
         .accept("application/json")

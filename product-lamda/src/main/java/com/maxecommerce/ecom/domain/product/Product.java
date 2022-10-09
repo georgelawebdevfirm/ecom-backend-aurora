@@ -23,6 +23,7 @@ import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.math.BigDecimal;
@@ -41,7 +42,7 @@ import static com.maxecommerce.ecom.domain.JpaTypeConstants.MAX_URL_LENGTH;
 @Table(
     name = "product",
     indexes = {
-      @Index(name = "idx_product_store_id", columnList = "storeId"),
+      @Index(name = "idx_product_uuid", columnList = "uuid"),
       @Index(name = "idx_product_store_id", columnList = "storeId")
     })
 public class Product extends BaseEntity<Long> {
@@ -140,7 +141,9 @@ public class Product extends BaseEntity<Long> {
 
   private Boolean isComplexVariant;
 
-  private String parentId;
+  @ManyToOne
+  @JoinColumn(name = "parent_id")
+  private Product parent;
 
   @OneToMany(mappedBy = "product")
   private List<ProductAttributeValue> attributes;
@@ -155,6 +158,4 @@ public class Product extends BaseEntity<Long> {
       joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
       inverseJoinColumns = @JoinColumn(name = "option_group_id", referencedColumnName = "id"))
   private Set<OptionGroup> optionGroups = new HashSet<>();
-
-  private Boolean isImported;
 }

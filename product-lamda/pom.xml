@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!--suppress VulnerableLibrariesLocal -->
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -16,6 +17,7 @@
         <quarkus.platform.version>2.13.0.Final</quarkus.platform.version>
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
+        <testcontainers.version>1.17.3</testcontainers.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -68,13 +70,19 @@
             <groupId>org.testcontainers</groupId>
             <artifactId>testcontainers</artifactId>
             <scope>test</scope>
-            <version>1.17.4</version>
+            <version>${testcontainers.version}</version>
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
-            <version>1.17.4</version>
+            <version>${testcontainers.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>mysql</artifactId>
+            <version>${testcontainers.version}</version>
+            <scope>test</scope>
         </dependency>
         <!-- Lombok -->
         <dependency>
@@ -117,6 +125,7 @@
                 <configuration>
                     <systemPropertyVariables>
                         <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                        <!--suppress UnresolvedMavenProperty -->
                         <maven.home>${maven.home}</maven.home>
                     </systemPropertyVariables>
                 </configuration>
@@ -135,6 +144,7 @@
                                 <native.image.path>${project.build.directory}/${project.build.finalName}-runner
                                 </native.image.path>
                                 <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                                <!--suppress UnresolvedMavenProperty -->
                                 <maven.home>${maven.home}</maven.home>
                             </systemPropertyVariables>
                         </configuration>

@@ -17,9 +17,14 @@ import java.util.UUID;
 public abstract class BaseEntity<I extends Serializable> {
 
   @Id @GeneratedValue protected I id;
-  protected UUID uuid;
+  @GeneratedValue protected UUID uuid;
   protected String storeId;
   protected Boolean deleted;
   protected Boolean active = true;
   @Embedded protected AuditAttributes auditAttributes;
+
+  public boolean hasId(){
+    return id != null;
+  }
+
 }
