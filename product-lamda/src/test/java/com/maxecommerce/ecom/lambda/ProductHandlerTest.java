@@ -20,7 +20,7 @@ class ProductHandlerTest {
   @Inject ObjectMapper mapper;
 
   @Test
-  void testSimpleLambdaSuccess() throws Exception {
+  void testCreateProduct() throws Exception {
 
     // GIVEN
     final Input in = new Input();

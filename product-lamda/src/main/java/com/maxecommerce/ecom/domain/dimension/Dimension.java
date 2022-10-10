@@ -1,12 +1,13 @@
 package com.maxecommerce.ecom.domain.dimension;
 
+import com.maxecommerce.ecom.domain.uom.UnitOfMeasure;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 
 @Setter
@@ -30,19 +31,19 @@ public class Dimension {
   private BigDecimal weight = DEFAULT_WEIGHT_VALUE;
 
   // Unit
-  @Enumerated(EnumType.STRING)
-  @Column(name = "dimension_weight_unit", columnDefinition = WeightUnitType.COLUMN_DEFINITION)
-  private WeightUnitType weightUnit;
+  @ManyToOne
+  @JoinColumn(name = "weight_unit_id", nullable = false)
+  private UnitOfMeasure weightUnit;
 
-  @Enumerated(EnumType.STRING)
-  @Column(name = "dimension_length_unit", columnDefinition = DimensionUnitType.COLUMN_DEFINITION)
-  private DimensionUnitType lengthUnit;
+  @ManyToOne
+  @JoinColumn(name = "length_unit_id", nullable = false)
+  private UnitOfMeasure lengthUnit;
 
-  @Enumerated(EnumType.STRING)
-  @Column(name = "dimension_width_unit", columnDefinition = DimensionUnitType.COLUMN_DEFINITION)
-  private DimensionUnitType widthUnit;
+  @ManyToOne
+  @JoinColumn(name = "width_unit_id", nullable = false)
+  private UnitOfMeasure widthUnit;
 
-  @Enumerated(EnumType.STRING)
-  @Column(name = "dimension_height_unit", columnDefinition = DimensionUnitType.COLUMN_DEFINITION)
-  private DimensionUnitType heightUnit;
+  @ManyToOne
+  @JoinColumn(name = "height_unit_id", nullable = false)
+  private UnitOfMeasure heightUnit;
 }

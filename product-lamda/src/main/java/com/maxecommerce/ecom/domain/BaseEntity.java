@@ -18,7 +18,7 @@ public abstract class BaseEntity<I extends Serializable> {
 
   @Id @GeneratedValue protected I id;
   @GeneratedValue protected UUID uuid;
-  protected String storeId;
+  protected UUID storeId;
   protected Boolean deleted;
   protected Boolean active = true;
   @Embedded protected AuditAttributes auditAttributes;

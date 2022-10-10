@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.Table;
 
 import static com.maxecommerce.ecom.domain.attribute.Attribute.AdditionalAttributeType.COLUMN_DEFINITION;
@@ -15,7 +16,12 @@ import static com.maxecommerce.ecom.domain.attribute.Attribute.AdditionalAttribu
 @Setter
 @Getter
 @Entity
-@Table(name = "attribute")
+@Table(
+    name = "attribute",
+    indexes = {
+      @Index(name = "idx_attribute_uuid", columnList = "uuid"),
+      @Index(name = "idx_attribute_store_id", columnList = "storeId")
+    })
 public class Attribute extends BaseEntity<Long> {
 
   private String name;
@@ -37,6 +43,7 @@ public class Attribute extends BaseEntity<Long> {
     LONG,
     /** Double parameter type. */
     DOUBLE;
-    public static final String COLUMN_DEFINITION = "ENUM('STRING', 'DATE', 'LONG', 'DOUBLE')";
+    public static final String COLUMN_DEFINITION =
+        "ENUM('ENUMERATOR', 'STRING', 'DATE', 'LONG', 'DOUBLE')";
   }
 }

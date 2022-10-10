@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,14 +24,15 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "product_attribute_value")
 public class ProductAttributeValue {
-  @Id Long id;
+
+  @Id @GeneratedValue private Long id;
 
   @ManyToOne
-  @JoinColumn(name = "product_id")
+  @JoinColumn(name = "product_id", nullable = false)
   private Product product;
 
   @ManyToOne
-  @JoinColumn(name = "attribute_id")
+  @JoinColumn(name = "attribute_id", nullable = false)
   private Attribute attribute;
 
   @Column(name = "string_val", length = 2048)
@@ -44,4 +46,7 @@ public class ProductAttributeValue {
 
   @Column(name = "double_val")
   private Double doubleVal;
+
+  @Column(name = "enumeration_value")
+  private AttributeEnumerationValue enumerationValue;
 }
